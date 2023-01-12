@@ -30,8 +30,16 @@ namespace TestBookSection
 			this.FileUpload1.SaveAs(path);
 			if (System.IO.File.Exists(path))
 			{
-				tb = new TestBook(path);		
-
+				tb = new TestBook(path);
+				if (tb != null)
+				{
+					string inputStream;
+					using (StreamReader inputStreamReader = new StreamReader(Request.Files[0].InputStream))
+					{
+						inputStream = inputStreamReader.ReadToEnd();
+						txtContent.Text = inputStream;
+					}
+				}
 			}
 			//OpenFileDialog dialog = new OpenFileDialog();
 			//dialog.Title = "Select txt file";
